@@ -1,0 +1,11 @@
+E:\VS 2013\Bluetooth\Bluetooth\bin\Debug\Bluetooth.exe.config
+E:\VS 2013\Bluetooth\Bluetooth\obj\Debug\Interop.MLApp.dll
+E:\VS 2013\Bluetooth\Bluetooth\obj\Debug\Bluetooth.csproj.ResolveComReference.cache
+E:\VS 2013\Bluetooth\Bluetooth\bin\Debug\Bluetooth.exe
+E:\VS 2013\Bluetooth\Bluetooth\bin\Debug\Bluetooth.pdb
+E:\VS 2013\Bluetooth\Bluetooth\obj\Debug\Bluetooth.csprojResolveAssemblyReference.cache
+E:\VS 2013\Bluetooth\Bluetooth\obj\Debug\Bluetooth.frmMain.resources
+E:\VS 2013\Bluetooth\Bluetooth\obj\Debug\Bluetooth.Properties.Resources.resources
+E:\VS 2013\Bluetooth\Bluetooth\obj\Debug\Bluetooth.csproj.GenerateResource.Cache
+E:\VS 2013\Bluetooth\Bluetooth\obj\Debug\Bluetooth.exe
+E:\VS 2013\Bluetooth\Bluetooth\obj\Debug\Bluetooth.pdb
