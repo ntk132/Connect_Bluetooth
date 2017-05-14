@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.IO.Ports;
 using System.Diagnostics;
+using System.Management;
 
 namespace Bluetooth
 {
@@ -19,6 +20,7 @@ namespace Bluetooth
         string inputData = String.Empty; // Chuỗi rỗng.
         delegate void SetTextData(string text);
         private string _path = @"E:\data";
+        private string save_path = @"E:\graphics";
 
         private DateTime time;
 
@@ -35,6 +37,23 @@ namespace Bluetooth
             timer.Interval = 1000; // 1 giây      
 
             _serialPort.DataReceived += _serialPort_DataReceived;
+
+            initListFileName();
+        }
+
+        private void initListFileName()
+        {
+            DirectoryInfo dic = new DirectoryInfo(_path);
+            List<string> listName = new List<string>();
+            BindingSource bs = new BindingSource();
+
+            foreach (FileInfo file in dic.GetFiles())
+            {
+                listName.Add(file.Name);
+            }
+
+            bs.DataSource = listName;
+            cbCollect.DataSource = bs;
         }
 
         void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -51,7 +70,17 @@ namespace Bluetooth
         private void frmMain_Load(object sender, EventArgs e)
         {
             // Quét các cổng đang kết nối với PC.
-            cbName.DataSource = SerialPort.GetPortNames();
+            string[] nameDevice = SerialPort.GetPortNames();
+
+            int index = 0;
+
+            foreach (myCOMName portCOM in myCOMName.getName())
+            {
+                nameDevice[index++] += " - " + portCOM.name;
+            }
+
+            // Hiển thị lên danh sách các cổng COM - tên device.
+            cbName.DataSource = nameDevice;
         }
 
         private void btConnectControl_Click(object sender, EventArgs e)
@@ -133,14 +162,18 @@ namespace Bluetooth
 
         private void btShow_Click(object sender, EventArgs e)
         {
-            DirectoryInfo dic = new DirectoryInfo(_path);
-
-            // Duyet qua tung file txt de lay ra du lieu
-            foreach (FileInfo file in dic.GetFiles())
+            if (cbCollect.Text == String.Empty)
             {
-                // Doc du lieu ra tu file txt
-                getSourceData(File.ReadAllLines(file.FullName));
+                MessageBox.Show("Chưa chọn file để biểu diễn đồ thị!");
+
+                return;
             }
+                
+
+            FileInfo file = new FileInfo(Path.Combine(_path, cbCollect.Text));
+
+            // Doc du lieu ra tu file txt
+            getSourceData(File.ReadAllLines(file.FullName));
 
             tb.Text = tembuf;
             string[] tem = tb.Lines;
@@ -159,6 +192,7 @@ namespace Bluetooth
             matlab.Execute(@"cd E:\data");            
             matlab.Execute("x = " + x);
             matlab.Execute("y = " + y);
+            matlab.Execute("grc(1) = figure;");
             matlab.Execute("subplot(2,1,1)");
             matlab.Execute("plot(x)");
             matlab.Execute("xlabel('Temperature')");
@@ -167,6 +201,9 @@ namespace Bluetooth
             matlab.Execute("plot(y)");
             matlab.Execute("xlabel('Humidity')");
             matlab.Execute("grid on");
+            //saveFigureMatlabAsPNG(matlab, file.Name);
+            matlab.Execute(@"cd E:\graphics");
+            matlab.Execute("saveas(grc, '" + Path.GetFileNameWithoutExtension(file.Name) + ".png')");
         }
 
         /* Ham tao ra ma tran dung de chay tren command cua Matlab:
@@ -260,6 +297,12 @@ namespace Bluetooth
             }
         }
 
+        private void saveFigureMatlabAsPNG(MLApp.MLApp matlab, string file_name)
+        {
+            matlab.Execute(@"cd 'E:\graphics");
+            matlab.Execute("saveas(grc, '" + file_name + ".png')");
+        }
+
         /* Nut Save:
            Khi nhan nut Save:
            - Lay data tu tren textbox hien thi xuong
@@ -301,6 +344,102 @@ namespace Bluetooth
         private void btOpenFolderSource_Click(object sender, EventArgs e)
         {
             Process.Start(@"E:\data");
+        }
+
+        private void btOpenFolderGraphic_Click(object sender, EventArgs e)
+        {
+            Process.Start(@"E:\graphics");
+        }
+
+        /*
+        internal class ProcessConnection
+        {
+            public static ConnectionOptions ProcessConnectionOptions()
+            {
+                ConnectionOptions options = new ConnectionOptions();
+                options.Impersonation = ImpersonationLevel.Impersonate;
+                options.Authentication = AuthenticationLevel.Default;
+                options.EnablePrivileges = true;
+                return options;
+            }
+
+            public static ManagementScope ConnectionScope(string machineName, ConnectionOptions options, string path)
+            {
+                ManagementScope connectScope = new ManagementScope();
+                connectScope.Path = new ManagementPath(@"\\" + machineName + path);
+                connectScope.Options = options;
+                connectScope.Connect();
+                return connectScope;
+            }
+        }
+
+        public class COMPortInfo
+        {
+            public string Name { get; set; }
+            public string Description { get; set; }
+
+            public COMPortInfo() { }
+
+            public static List<COMPortInfo> GetCOMPortsInfo()
+            {
+                List<COMPortInfo> comPortInfoList = new List<COMPortInfo>();
+
+                ConnectionOptions options = ProcessConnection.ProcessConnectionOptions();
+                ManagementScope connectionScope = ProcessConnection.ConnectionScope(Environment.MachineName, options, @"\root\CIMV2");
+
+                ObjectQuery objectQuery = new ObjectQuery("SELECT * FROM Win32_PnPEntity WHERE ConfigManagerErrorCode = 0");
+                ManagementObjectSearcher comPortSearcher = new ManagementObjectSearcher(connectionScope, objectQuery);
+
+                using (comPortSearcher)
+                {
+                    string caption = null;
+                    foreach (ManagementObject obj in comPortSearcher.Get())
+                    {
+                        if (obj != null)
+                        {
+                            object captionObj = obj["Caption"];
+                            if (captionObj != null)
+                            {
+                                caption = captionObj.ToString();
+                                if (caption.Contains("(COM"))
+                                {
+                                    COMPortInfo comPortInfo = new COMPortInfo();
+                                    comPortInfo.Name = caption.Substring(caption.LastIndexOf("(COM")).Replace("(", string.Empty).Replace(")", string.Empty);
+                                    comPortInfo.Description = caption;
+                                    comPortInfoList.Add(comPortInfo);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return comPortInfoList;
+            }
+        }
+        */
+
+        public class myCOMName
+        {
+            public string name { get; set; }
+
+            public myCOMName() { }
+
+            public static List<myCOMName> getName()
+            {
+                List<myCOMName> list = new List<myCOMName>();
+                ManagementObjectSearcher _searcher = new ManagementObjectSearcher("select * from Win32_SerialPort");
+
+                foreach (ManagementObject _usb in _searcher.Get())
+                {
+                    myCOMName com = new myCOMName();
+
+                    com.name = _usb["Caption"].ToString();
+
+                    list.Add(com);
+                }
+
+                return list;
+            }
         }
     }
 }

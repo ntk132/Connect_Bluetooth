@@ -56,6 +56,9 @@
             this.btShow = new System.Windows.Forms.Button();
             this.btSave = new System.Windows.Forms.Button();
             this.btOpenFolderSource = new System.Windows.Forms.Button();
+            this.cbCollect = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btOpenFolderGraphic = new System.Windows.Forms.Button();
             this.pnControl.SuspendLayout();
             this.pnShow.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -67,7 +70,7 @@
             this.cbName.FormattingEnabled = true;
             this.cbName.Location = new System.Drawing.Point(93, 10);
             this.cbName.Name = "cbName";
-            this.cbName.Size = new System.Drawing.Size(100, 21);
+            this.cbName.Size = new System.Drawing.Size(257, 21);
             this.cbName.TabIndex = 0;
             this.cbName.TextChanged += new System.EventHandler(this.cbName_TextChanged);
             // 
@@ -76,12 +79,12 @@
             this.tbSendData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbSendData.Location = new System.Drawing.Point(6, 31);
             this.tbSendData.Name = "tbSendData";
-            this.tbSendData.Size = new System.Drawing.Size(157, 22);
+            this.tbSendData.Size = new System.Drawing.Size(246, 22);
             this.tbSendData.TabIndex = 1;
             // 
             // btSend
             // 
-            this.btSend.Location = new System.Drawing.Point(169, 28);
+            this.btSend.Location = new System.Drawing.Point(258, 28);
             this.btSend.Name = "btSend";
             this.btSend.Size = new System.Drawing.Size(75, 25);
             this.btSend.TabIndex = 2;
@@ -93,9 +96,9 @@
             this.pnControl.Controls.Add(this.btConnectControl);
             this.pnControl.Controls.Add(this.lbState);
             this.pnControl.Controls.Add(this.lbTrangThai);
-            this.pnControl.Location = new System.Drawing.Point(276, 293);
+            this.pnControl.Location = new System.Drawing.Point(357, 295);
             this.pnControl.Name = "pnControl";
-            this.pnControl.Size = new System.Drawing.Size(250, 54);
+            this.pnControl.Size = new System.Drawing.Size(365, 54);
             this.pnControl.TabIndex = 3;
             // 
             // btConnectControl
@@ -134,7 +137,7 @@
             this.pnShow.Controls.Add(this.lbReciveData);
             this.pnShow.Location = new System.Drawing.Point(12, 12);
             this.pnShow.Name = "pnShow";
-            this.pnShow.Size = new System.Drawing.Size(250, 275);
+            this.pnShow.Size = new System.Drawing.Size(339, 275);
             this.pnShow.TabIndex = 4;
             // 
             // tbDataReading
@@ -143,7 +146,7 @@
             this.tbDataReading.Multiline = true;
             this.tbDataReading.Name = "tbDataReading";
             this.tbDataReading.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbDataReading.Size = new System.Drawing.Size(241, 239);
+            this.tbDataReading.Size = new System.Drawing.Size(330, 239);
             this.tbDataReading.TabIndex = 1;
             // 
             // lbReciveData
@@ -168,7 +171,7 @@
             this.panel1.Enabled = false;
             this.panel1.Location = new System.Drawing.Point(12, 293);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(250, 56);
+            this.panel1.Size = new System.Drawing.Size(336, 56);
             this.panel1.TabIndex = 5;
             // 
             // lbSendData
@@ -193,9 +196,9 @@
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.cbName);
-            this.panel2.Location = new System.Drawing.Point(276, 42);
+            this.panel2.Location = new System.Drawing.Point(357, 42);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(250, 242);
+            this.panel2.Size = new System.Drawing.Size(365, 242);
             this.panel2.TabIndex = 6;
             // 
             // label6
@@ -232,28 +235,28 @@
             // 
             this.tbParity.Location = new System.Drawing.Point(93, 130);
             this.tbParity.Name = "tbParity";
-            this.tbParity.Size = new System.Drawing.Size(100, 20);
+            this.tbParity.Size = new System.Drawing.Size(257, 20);
             this.tbParity.TabIndex = 6;
             // 
             // tbHandShake
             // 
             this.tbHandShake.Location = new System.Drawing.Point(93, 170);
             this.tbHandShake.Name = "tbHandShake";
-            this.tbHandShake.Size = new System.Drawing.Size(100, 20);
+            this.tbHandShake.Size = new System.Drawing.Size(257, 20);
             this.tbHandShake.TabIndex = 5;
             // 
             // tbDataBits
             // 
             this.tbDataBits.Location = new System.Drawing.Point(93, 90);
             this.tbDataBits.Name = "tbDataBits";
-            this.tbDataBits.Size = new System.Drawing.Size(100, 20);
+            this.tbDataBits.Size = new System.Drawing.Size(257, 20);
             this.tbDataBits.TabIndex = 4;
             // 
             // tbBaudRate
             // 
             this.tbBaudRate.Location = new System.Drawing.Point(93, 50);
             this.tbBaudRate.Name = "tbBaudRate";
-            this.tbBaudRate.Size = new System.Drawing.Size(100, 20);
+            this.tbBaudRate.Size = new System.Drawing.Size(257, 20);
             this.tbBaudRate.TabIndex = 3;
             // 
             // label3
@@ -278,9 +281,9 @@
             // 
             // btShow
             // 
-            this.btShow.Location = new System.Drawing.Point(369, 353);
+            this.btShow.Location = new System.Drawing.Point(450, 355);
             this.btShow.Name = "btShow";
-            this.btShow.Size = new System.Drawing.Size(75, 25);
+            this.btShow.Size = new System.Drawing.Size(100, 25);
             this.btShow.TabIndex = 7;
             this.btShow.Text = "Show";
             this.btShow.UseVisualStyleBackColor = true;
@@ -288,9 +291,9 @@
             // 
             // btSave
             // 
-            this.btSave.Location = new System.Drawing.Point(451, 353);
+            this.btSave.Location = new System.Drawing.Point(622, 355);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(75, 25);
+            this.btSave.Size = new System.Drawing.Size(100, 25);
             this.btSave.TabIndex = 9;
             this.btSave.Text = "Save";
             this.btSave.UseVisualStyleBackColor = true;
@@ -298,7 +301,7 @@
             // 
             // btOpenFolderSource
             // 
-            this.btOpenFolderSource.Location = new System.Drawing.Point(162, 352);
+            this.btOpenFolderSource.Location = new System.Drawing.Point(164, 355);
             this.btOpenFolderSource.Name = "btOpenFolderSource";
             this.btOpenFolderSource.Size = new System.Drawing.Size(100, 25);
             this.btOpenFolderSource.TabIndex = 4;
@@ -306,11 +309,43 @@
             this.btOpenFolderSource.UseVisualStyleBackColor = true;
             this.btOpenFolderSource.Click += new System.EventHandler(this.btOpenFolderSource_Click);
             // 
+            // cbCollect
+            // 
+            this.cbCollect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbCollect.FormattingEnabled = true;
+            this.cbCollect.Location = new System.Drawing.Point(450, 7);
+            this.cbCollect.Name = "cbCollect";
+            this.cbCollect.Size = new System.Drawing.Size(257, 21);
+            this.cbCollect.TabIndex = 10;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(360, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(62, 16);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Chọn file:";
+            // 
+            // btOpenFolderGraphic
+            // 
+            this.btOpenFolderGraphic.Location = new System.Drawing.Point(12, 355);
+            this.btOpenFolderGraphic.Name = "btOpenFolderGraphic";
+            this.btOpenFolderGraphic.Size = new System.Drawing.Size(100, 25);
+            this.btOpenFolderGraphic.TabIndex = 4;
+            this.btOpenFolderGraphic.Text = "Folder Graphic";
+            this.btOpenFolderGraphic.UseVisualStyleBackColor = true;
+            this.btOpenFolderGraphic.Click += new System.EventHandler(this.btOpenFolderGraphic_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(539, 382);
+            this.ClientSize = new System.Drawing.Size(734, 387);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cbCollect);
+            this.Controls.Add(this.btOpenFolderGraphic);
             this.Controls.Add(this.btOpenFolderSource);
             this.Controls.Add(this.btSave);
             this.Controls.Add(this.btShow);
@@ -330,6 +365,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -362,6 +398,9 @@
         private System.Windows.Forms.Button btShow;
         private System.Windows.Forms.Button btSave;
         private System.Windows.Forms.Button btOpenFolderSource;
+        private System.Windows.Forms.ComboBox cbCollect;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btOpenFolderGraphic;
     }
 }
 
